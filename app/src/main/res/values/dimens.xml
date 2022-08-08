@@ -7,4 +7,9 @@
     <!-- Launcher fragment -->
     <dimen name="ballot_logo_margin_top">130dp</dimen>
 
+    <!-- Elections fragment -->
+    <dimen name="text_size_headers">32sp</dimen>
+    <dimen name="election_item_title_text">20sp</dimen>
+    <dimen name="election_item_date_text">18sp</dimen>
+
 </resources>

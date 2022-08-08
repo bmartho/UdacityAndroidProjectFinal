@@ -7,4 +7,8 @@
     <string name="upcoming_button_text">Upcoming elections</string>
     <string name="content_description_ballot_logo">Ballot image</string>
 
+    <!-- Elections fragment -->
+    <string name="upcoming_elections_header">Upcoming elections</string>
+    <string name="saved_elections_header">Saved elections</string>
+
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/default_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/election_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/election_item_title_text"
+        android:textStyle="bold"
+        tools:text="Michigan Consolidate Election" />
+
+    <TextView
+        android:id="@+id/election_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/election_item_date_text"
+        tools:text="Tue Apr 07 00:00:00 EDT 2020" />
+
+</LinearLayout>

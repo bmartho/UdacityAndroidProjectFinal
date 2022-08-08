@@ -20,21 +20,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/representativeButton"
-            style="@style/default_button"
+            android:id="@+id/upcomingButton"
+            style="@style/DefaultButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/representative_button_text"
-            app:layout_constraintBottom_toTopOf="@id/upcomingButton"
+            android:text="@string/upcoming_button_text"
+            app:layout_constraintBottom_toTopOf="@id/representativeButton"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/upcomingButton"
-            style="@style/default_button"
+            android:id="@+id/representativeButton"
+            style="@style/DefaultButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/upcoming_button_text"
+            android:text="@string/representative_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
