@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Political Preparedness</string>
 
-    <!-- TODO: Add necessary string values -->
+    <!-- Launcher fragment -->
+    <string name="representative_button_text">Find my representatives</string>
+    <string name="upcoming_button_text">Upcoming elections</string>
+    <string name="content_description_ballot_logo">Ballot image</string>
 
 </resources>

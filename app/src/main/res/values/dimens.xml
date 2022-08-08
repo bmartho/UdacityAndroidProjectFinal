@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="default_padding">8dp</dimen>
+    <dimen name="default_half_padding">8dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="default_half_margin">8dp</dimen>
 
-    <!-- TODO: Add necessary dimension values -->s
+    <!-- Launcher fragment -->
+    <dimen name="ballot_logo_margin_top">130dp</dimen>
 
 </resources>
