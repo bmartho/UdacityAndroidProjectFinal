@@ -1,20 +1,6 @@
 package com.example.android.politicalpreparedness.representative.adapter
 
-import android.content.Intent
-import android.content.Intent.ACTION_VIEW
-import android.net.Uri
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.example.android.politicalpreparedness.R
-import com.example.android.politicalpreparedness.databinding.ViewholderRepresentativeBinding
-import com.example.android.politicalpreparedness.network.models.Channel
-import com.example.android.politicalpreparedness.representative.model.Representative
-
+/*
 class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeViewHolder>(RepresentativeDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
@@ -76,7 +62,7 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): Re
         itemView.context.startActivity(intent)
     }
 
-}
+}*/
 
 //TODO: Create RepresentativeDiffCallback
 
