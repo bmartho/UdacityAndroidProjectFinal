@@ -27,7 +27,7 @@ class ElectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProvider(
-            this, ElectionsViewModelFactory()
+            this, ElectionsViewModelFactory(requireContext())
         ).get(ElectionsViewModel::class.java)
 
         binding = FragmentElectionBinding.inflate(inflater)

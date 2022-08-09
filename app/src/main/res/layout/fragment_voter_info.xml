@@ -117,6 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
+            android:onClick="@{() -> viewModel.followElectionButtonClick()}"
             android:text="@{viewModel.isDbSaved ? @string/unfollow_election : @string/follow_election}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

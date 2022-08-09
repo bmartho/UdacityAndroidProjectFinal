@@ -8,9 +8,7 @@ import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.repository.ElectionsRepository
 import kotlinx.coroutines.launch
 
-class ElectionsViewModel : ViewModel() {
-    private val repository = ElectionsRepository()
-
+class ElectionsViewModel(private val repository: ElectionsRepository) : ViewModel() {
     val upcomingElections: LiveData<List<Election>>
         get() = _upcomingElections
     private val _upcomingElections = MutableLiveData(listOf<Election>())

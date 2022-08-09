@@ -4,13 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
 import com.example.android.politicalpreparedness.repository.ElectionsRepository
 import kotlinx.coroutines.launch
 
-class VoterInfoViewModel : ViewModel() {
-    private val repository = ElectionsRepository()
-
+class VoterInfoViewModel(private val repository: ElectionsRepository) : ViewModel() {
     val voterInfo: LiveData<VoterInfoResponse?>
         get() = _voterInfo
     private val _voterInfo = MutableLiveData<VoterInfoResponse?>(null)
@@ -43,6 +42,7 @@ class VoterInfoViewModel : ViewModel() {
         get() = _electionInformationUrl
     private val _electionInformationUrl = MutableLiveData<String?>(null)
 
+    lateinit var currentElection: Election
     fun getVoterInfo(address: String, electionId: Int) {
         viewModelScope.launch {
             _voterInfoLoading.value = true
@@ -53,6 +53,8 @@ class VoterInfoViewModel : ViewModel() {
             if (voterInfo == null) {
                 _voterInfoError.value = true
             } else {
+                currentElection = voterInfo.election
+
                 _voterInfoError.value = false
                 _voterInfo.value = voterInfo
 
@@ -83,15 +85,17 @@ class VoterInfoViewModel : ViewModel() {
         }
     }
 
-
-    //TODO: Add var and methods to populate voter info
-
-    //TODO: Add var and methods to support loading URL
-    //TODO: Add var and methods to save and remove elections to local database
-    //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
-
-    /**
-     * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
-     */
-
+    fun followElectionButtonClick() {
+        viewModelScope.launch {
+            isDbSaved.value?.let { isElectionFollowed ->
+                if (isElectionFollowed) {
+                    repository.unfollowElection(currentElection.id)
+                    _isDbSaved.value = false
+                } else {
+                    repository.followElection(currentElection)
+                    _isDbSaved.value = true
+                }
+            }
+        }
+    }
 }

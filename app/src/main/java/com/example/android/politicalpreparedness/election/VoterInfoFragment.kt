@@ -21,7 +21,7 @@ class VoterInfoFragment : Fragment() {
     ): View {
 
         viewModel = ViewModelProvider(
-            this, VoterInfoViewModelFactory()
+            this, VoterInfoViewModelFactory(requireContext())
         ).get(VoterInfoViewModel::class.java)
 
         val binding = FragmentVoterInfoBinding.inflate(inflater)
