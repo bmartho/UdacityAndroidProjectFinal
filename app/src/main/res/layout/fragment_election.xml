@@ -3,29 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Add node to connect Election ViewModel -->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/default_half_padding"
-        tools:context="com.example.android.politicalpreparedness.MainActivity">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/upcoming_elections_text"
-            style="@style/ElectionsFragmentHeaders"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/upcoming_elections_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_half_padding"
+            tools:context="com.example.android.politicalpreparedness.MainActivity">
 
+            <TextView
+                android:id="@+id/upcoming_elections_text"
+                style="@style/ElectionsFragmentHeaders"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/upcoming_elections_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/ElectionsFragmentHeaders"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/upcoming_elections_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upcoming_elections_text" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcoming_election_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/upcoming_election_recycler_height"
+                android:layout_marginTop="@dimen/default_margin"
+                android:visibility="invisible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcoming_elections_text" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/upcoming_election_loading_wheel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:indeterminate="true"
+                app:layout_constraintBottom_toTopOf="@id/saved_elections_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcoming_elections_text" />
+
+            <TextView
+                android:id="@+id/upcoming_election_error_text"
+                style="@style/ErrorTexts"
+                android:text="@string/generic_network_error"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/saved_elections_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcoming_elections_text"
+                tools:text="Error: Try again later" />
+
+            <TextView
+                android:id="@+id/saved_elections_text"
+                style="@style/ElectionsFragmentHeaders"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/saved_elections_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcoming_election_recycler" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

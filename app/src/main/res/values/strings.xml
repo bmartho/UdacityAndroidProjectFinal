@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Political Preparedness</string>
+    <string name="generic_network_error">Error: Try again later</string>
 
     <!-- Launcher fragment -->
     <string name="representative_button_text">Find my representatives</string>
