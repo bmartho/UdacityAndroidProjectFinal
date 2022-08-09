@@ -17,6 +17,35 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
+        <ProgressBar
+            android:id="@+id/election_info_loading_wheel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.voterInfoLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/election_info_error_text"
+            style="@style/ErrorTexts"
+            android:text="@string/election_not_found_error"
+            android:visibility="@{viewModel.voterInfoError ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Error: Try again later" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/general_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.voterInfo != null ? View.VISIBLE : View.GONE}"
+            app:constraint_referenced_ids="election_name, election_date, state_header, followButton" />
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/election_name"
             android:layout_width="match_parent"
@@ -41,22 +70,23 @@
             android:id="@+id/state_header"
             style="@style/ElectionInformationHeader"
             android:text="@string/election_information_header"
+            android:visibility="@{viewModel.stateLocationUrl != null || viewModel.stateBallotUrl != null || viewModel.electionInformationUrl != null? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintTop_toBottomOf="@id/election_date" />
 
-        <!-- TODO: Add click binding to open web URL -->
         <TextView
             android:id="@+id/state_locations"
             style="@style/ElectionInformationBody"
             android:text="@string/voting_location"
+            android:visibility="@{viewModel.stateLocationUrl != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintTop_toBottomOf="@id/state_header" />
 
-        <!-- TODO: Add click binding to open web URL -->
         <TextView
             android:id="@+id/state_ballot"
             style="@style/ElectionInformationBody"
             android:text="@string/ballot_information"
+            android:visibility="@{viewModel.stateBallotUrl != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintTop_toBottomOf="@id/state_locations" />
 
@@ -64,7 +94,7 @@
             android:id="@+id/address_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.voterAddress != `` ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.voterAddress != null ? View.VISIBLE : View.GONE}"
             app:constraint_referenced_ids="state_correspondence_header,address" />
 
         <TextView
@@ -82,11 +112,11 @@
             app:layout_constraintTop_toBottomOf="@id/state_correspondence_header" />
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/followButton"
             style="@style/DefaultButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_margin="@dimen/default_margin"
             android:text="@{viewModel.isDbSaved ? @string/unfollow_election : @string/follow_election}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

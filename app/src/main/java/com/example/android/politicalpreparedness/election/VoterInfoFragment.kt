@@ -1,5 +1,7 @@
 package com.example.android.politicalpreparedness.election
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,25 +35,38 @@ class VoterInfoFragment : Fragment() {
         val address = "${division.state} ${division.country}"
         viewModel.getVoterInfo(address, electionId)
 
-        //TODO: Add ViewModel values and create ViewModel
+        binding.stateLocations.setOnClickListener {
+            viewModel.stateLocationUrl.value?.let { url ->
+                loadUrl(url)
+            }
+        }
 
-        //TODO: Add binding values
+        binding.stateBallot.setOnClickListener {
+            viewModel.stateBallotUrl.value?.let { url ->
+                loadUrl(url)
+            }
+        }
 
-        //TODO: Populate voter info -- hide views without provided data.
-        /**
-        Hint: You will need to ensure proper data is provided from previous fragment.
-         */
-
-
-        //TODO: Handle loading of URLs
+        binding.stateHeader.setOnClickListener {
+            viewModel.electionInformationUrl.value?.let { url ->
+                loadUrl(url)
+            }
+        }
 
         //TODO: Handle save button UI state
         //TODO: cont'd Handle save button clicks
 
         return binding.root
-
     }
 
-    //TODO: Create method to load URL intents
+    private fun loadUrl(url: String) {
+        var finalurl = url
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            finalurl = "http://$url"
+        }
+
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(finalurl))
+        startActivity(browserIntent)
+    }
 
 }

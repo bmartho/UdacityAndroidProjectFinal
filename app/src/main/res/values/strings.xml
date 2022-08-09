@@ -19,5 +19,6 @@
     <string name="address_information">Address Information</string>
     <string name="follow_election">Follow Election</string>
     <string name="unfollow_election">Unfollow Election</string>
+    <string name="election_not_found_error">Error: Election not found</string>
 
 </resources>

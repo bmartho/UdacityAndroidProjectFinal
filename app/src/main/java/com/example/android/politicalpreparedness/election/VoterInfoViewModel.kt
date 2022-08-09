@@ -23,14 +23,25 @@ class VoterInfoViewModel : ViewModel() {
         get() = _voterInfoLoading
     private val _voterInfoLoading = MutableLiveData(false)
 
-    val voterAddress: LiveData<String>
+    val voterAddress: LiveData<String?>
         get() = _voterAddress
-    private val _voterAddress = MutableLiveData("")
+    private val _voterAddress = MutableLiveData<String?>(null)
 
     val isDbSaved: LiveData<Boolean>
         get() = _isDbSaved
     private val _isDbSaved = MutableLiveData(false)
 
+    val stateBallotUrl: LiveData<String?>
+        get() = _stateBallotUrl
+    private val _stateBallotUrl = MutableLiveData<String?>(null)
+
+    val stateLocationUrl: LiveData<String?>
+        get() = _stateLocationUrl
+    private val _stateLocationUrl = MutableLiveData<String?>(null)
+
+    val electionInformationUrl: LiveData<String?>
+        get() = _electionInformationUrl
+    private val _electionInformationUrl = MutableLiveData<String?>(null)
 
     fun getVoterInfo(address: String, electionId: Int) {
         viewModelScope.launch {
@@ -44,17 +55,38 @@ class VoterInfoViewModel : ViewModel() {
             } else {
                 _voterInfoError.value = false
                 _voterInfo.value = voterInfo
-                _voterAddress.value = address
+
+                buildFinalAddress(voterInfo)
+
+                _stateBallotUrl.value =
+                    voterInfo.state?.get(0)?.electionAdministrationBody?.ballotInfoUrl
+                _stateLocationUrl.value =
+                    voterInfo.state?.get(0)?.electionAdministrationBody?.votingLocationFinderUrl
+                _electionInformationUrl.value =
+                    voterInfo.state?.get(0)?.electionAdministrationBody?.electionInfoUrl
             }
 
             _voterInfoLoading.value = false
         }
     }
 
+
+    private fun buildFinalAddress(voterInfoResponse: VoterInfoResponse) {
+        voterInfoResponse.state?.let { list ->
+            if (list.isNotEmpty()) {
+                list[0].electionAdministrationBody.correspondenceAddress?.let { address ->
+                    address.apply {
+                        _voterAddress.value = "$line1 - $city - $state"
+                    }
+                }
+            }
+        }
+    }
+
+
     //TODO: Add var and methods to populate voter info
 
-    //TODO: Add var and methods to support loading URLs
-
+    //TODO: Add var and methods to support loading URL
     //TODO: Add var and methods to save and remove elections to local database
     //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
 
