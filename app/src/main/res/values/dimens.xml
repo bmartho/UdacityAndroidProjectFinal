@@ -8,10 +8,15 @@
     <dimen name="ballot_logo_margin_top">130dp</dimen>
 
     <!-- Elections fragment -->
-    <dimen name="text_size_headers">32sp</dimen>
+    <dimen name="election_fragment_text_size_headers">32sp</dimen>
     <dimen name="election_item_title_text">20sp</dimen>
     <dimen name="election_item_date_text">18sp</dimen>
     <dimen name="upcoming_election_recycler_height">300dp</dimen>
     <dimen name="error_text">24sp</dimen>
+
+    <!-- Voter Info fragment -->
+    <dimen name="voter_info_date_text">18sp</dimen>
+    <dimen name="voter_info_text_size_headers">24sp</dimen>
+
 
 </resources>

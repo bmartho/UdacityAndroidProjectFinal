@@ -17,7 +17,7 @@
     <style name="ElectionsFragmentHeaders">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/text_size_headers</item>
+        <item name="android:textSize">@dimen/election_fragment_text_size_headers</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -26,6 +26,21 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorError</item>
         <item name="android:textSize">@dimen/error_text</item>
+    </style>
+
+    <style name="ElectionInformationBody">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/voter_info_date_text</item>
+    </style>
+
+    <style name="ElectionInformationHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:textSize">@dimen/voter_info_text_size_headers</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

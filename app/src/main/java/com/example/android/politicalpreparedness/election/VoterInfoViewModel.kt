@@ -23,6 +23,15 @@ class VoterInfoViewModel : ViewModel() {
         get() = _voterInfoLoading
     private val _voterInfoLoading = MutableLiveData(false)
 
+    val voterAddress: LiveData<String>
+        get() = _voterAddress
+    private val _voterAddress = MutableLiveData("")
+
+    val isDbSaved: LiveData<Boolean>
+        get() = _isDbSaved
+    private val _isDbSaved = MutableLiveData(false)
+
+
     fun getVoterInfo(address: String, electionId: Int) {
         viewModelScope.launch {
             _voterInfoLoading.value = true
@@ -35,6 +44,7 @@ class VoterInfoViewModel : ViewModel() {
             } else {
                 _voterInfoError.value = false
                 _voterInfo.value = voterInfo
+                _voterAddress.value = address
             }
 
             _voterInfoLoading.value = false
