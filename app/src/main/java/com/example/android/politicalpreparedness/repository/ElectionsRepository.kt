@@ -35,4 +35,10 @@ class ElectionsRepository(private val dataSource: ElectionDao) {
             dataSource.deleteElectionById(electionId)
         }
     }
+
+    suspend fun getElectionById(electionId: Int) =
+        withContext(Dispatchers.IO) {
+            dataSource.getElectionById(electionId)
+        }
+
 }

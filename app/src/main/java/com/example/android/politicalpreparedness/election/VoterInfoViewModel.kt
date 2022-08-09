@@ -48,6 +48,7 @@ class VoterInfoViewModel(private val repository: ElectionsRepository) : ViewMode
             _voterInfoLoading.value = true
             _voterInfoError.value = false
 
+            _isDbSaved.value = repository.getElectionById(electionId) != null
             val voterInfo = repository.getVoterInfo(address, electionId)
 
             if (voterInfo == null) {

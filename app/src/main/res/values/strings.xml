@@ -15,6 +15,7 @@
     <!-- Voter Info fragment -->
     <string name="election_information_header">Election Information</string>
     <string name="voting_location">Voting Location</string>
+    <string name="extra_info">Extra Information</string>
     <string name="ballot_information">Ballot Information</string>
     <string name="address_information">Address Information</string>
     <string name="follow_election">Follow Election</string>

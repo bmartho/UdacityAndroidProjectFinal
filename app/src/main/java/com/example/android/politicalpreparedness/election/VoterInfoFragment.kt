@@ -47,7 +47,7 @@ class VoterInfoFragment : Fragment() {
             }
         }
 
-        binding.stateHeader.setOnClickListener {
+        binding.stateExtraInfo.setOnClickListener {
             viewModel.electionInformationUrl.value?.let { url ->
                 loadUrl(url)
             }
