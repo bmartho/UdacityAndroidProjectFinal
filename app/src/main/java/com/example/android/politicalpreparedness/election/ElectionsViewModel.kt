@@ -34,7 +34,7 @@ class ElectionsViewModel : ViewModel() {
 
             val elections = repository.getElections()
 
-            if (elections.isEmpty()) {
+            if (elections == null) {
                 _upcomingElectionsError.value = true
             } else {
                 _upcomingElectionsError.value = false

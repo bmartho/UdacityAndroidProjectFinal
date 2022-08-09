@@ -1,11 +1,45 @@
 package com.example.android.politicalpreparedness.election
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.politicalpreparedness.database.ElectionDao
+import androidx.lifecycle.viewModelScope
+import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
+import com.example.android.politicalpreparedness.repository.ElectionsRepository
+import kotlinx.coroutines.launch
 
-class VoterInfoViewModel(private val dataSource: ElectionDao) : ViewModel() {
+class VoterInfoViewModel : ViewModel() {
+    private val repository = ElectionsRepository()
 
-    //TODO: Add live data to hold voter info
+    val voterInfo: LiveData<VoterInfoResponse?>
+        get() = _voterInfo
+    private val _voterInfo = MutableLiveData<VoterInfoResponse?>(null)
+
+    val voterInfoError: LiveData<Boolean>
+        get() = _voterInfoError
+    private val _voterInfoError = MutableLiveData(false)
+
+    val voterInfoLoading: LiveData<Boolean>
+        get() = _voterInfoLoading
+    private val _voterInfoLoading = MutableLiveData(false)
+
+    fun getVoterInfo(address: String, electionId: Int) {
+        viewModelScope.launch {
+            _voterInfoLoading.value = true
+            _voterInfoError.value = false
+
+            val voterInfo = repository.getVoterInfo(address, electionId)
+
+            if (voterInfo == null) {
+                _voterInfoError.value = true
+            } else {
+                _voterInfoError.value = false
+                _voterInfo.value = voterInfo
+            }
+
+            _voterInfoLoading.value = false
+        }
+    }
 
     //TODO: Add var and methods to populate voter info
 
