@@ -28,7 +28,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- TODO: Add data binding value -->
             <EditText
                 android:id="@+id/address_line_1"
                 android:layout_width="match_parent"
@@ -41,7 +40,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_title" />
 
-            <!-- TODO: Add data binding value -->
             <EditText
                 android:id="@+id/address_line_2"
                 android:layout_width="match_parent"
@@ -54,7 +52,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/address_line_1" />
 
-            <!-- TODO: Add data binding value -->
+
             <EditText
                 android:id="@+id/city"
                 android:layout_width="0dp"
@@ -68,8 +66,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/address_line_2" />
 
-            <!-- TODO: Add default values from provided resources  -->
-            <!-- TODO: Add data binding value -->
             <Spinner
                 android:id="@+id/state"
                 android:layout_width="0dp"
@@ -83,7 +79,6 @@
                 app:layout_constraintTop_toTopOf="@id/city"
                 app:spinnerAddress="@{viewModel.address}" />
 
-            <!-- TODO: Add data binding value -->
             <EditText
                 android:id="@+id/zip"
                 android:layout_width="0dp"

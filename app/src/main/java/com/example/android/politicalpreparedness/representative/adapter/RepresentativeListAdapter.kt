@@ -43,9 +43,6 @@ class RepresentativeViewHolder(val binding: RepresentativeListItemBinding) :
             showWWWLinks(urls)
         }
 
-        //TODO: Show social links ** Hint: Use provided helper methods
-        //TODO: Show www link ** Hint: Use provided helper methods
-
         binding.executePendingBindings()
     }
 
