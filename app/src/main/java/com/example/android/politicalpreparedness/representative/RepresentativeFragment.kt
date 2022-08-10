@@ -4,13 +4,15 @@ import android.content.Context
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
-import java.util.Locale
+import java.util.*
 
 class DetailFragment : Fragment() {
 
@@ -18,13 +20,21 @@ class DetailFragment : Fragment() {
         //TODO: Add Constant for Location request
     }
 
-    //TODO: Declare ViewModel
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    lateinit var viewModel: RepresentativeViewModel
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val binding = FragmentRepresentativeBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this).get(RepresentativeViewModel::class.java)
+        binding.viewModel = viewModel
+
+        binding.buttonSearch.setOnClickListener {
+            viewModel.getRepresentatives()
+        }
+
         //TODO: Establish bindings
 
         //TODO: Define and assign Representative adapter
@@ -35,7 +45,11 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         //TODO: Handle location permission result to get location on permission granted
     }
@@ -49,7 +63,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun isPermissionGranted() : Boolean {
+    private fun isPermissionGranted(): Boolean {
         //TODO: Check if permission is already granted and return (true = granted, false = denied/other)
         return false
     }
@@ -62,10 +76,16 @@ class DetailFragment : Fragment() {
     private fun geoCodeLocation(location: Location): Address {
         val geocoder = Geocoder(context, Locale.getDefault())
         return geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                .map { address ->
-                    Address(address.thoroughfare, address.subThoroughfare, address.locality, address.adminArea, address.postalCode)
-                }
-                .first()
+            .map { address ->
+                Address(
+                    address.thoroughfare,
+                    address.subThoroughfare,
+                    address.locality,
+                    address.adminArea,
+                    address.postalCode
+                )
+            }
+            .first()
     }
 
     private fun hideKeyboard() {

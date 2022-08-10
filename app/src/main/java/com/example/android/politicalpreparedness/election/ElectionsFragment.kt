@@ -72,7 +72,7 @@ class ElectionsFragment : Fragment() {
             }
         }
 
-        viewModel.followedElections.observe(viewLifecycleOwner) { elections ->
+        viewModel.followedElections?.observe(viewLifecycleOwner) { elections ->
             if (elections.isNotEmpty()) {
                 followedElectionListAdapter.submitList(elections)
                 binding.followedElectionRecycler.visibility = VISIBLE

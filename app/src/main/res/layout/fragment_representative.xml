@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:motion="http://schemas.android.com/tools">
 
-    <!-- TODO: Add data binding node -->
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
+    </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -26,6 +31,7 @@
             android:autofillHints=""
             android:hint="@string/address_line_1_hint"
             android:inputType="textPostalAddress"
+            android:text="@={viewModel.address.line1}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_title" />
 
@@ -38,6 +44,7 @@
             android:autofillHints=""
             android:hint="@string/address_line_2_hint"
             android:inputType="textPostalAddress"
+            android:text="@={viewModel.address.line2}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/address_line_1" />
 
@@ -50,6 +57,7 @@
             android:autofillHints=""
             android:hint="@string/city_hint"
             android:inputType="textPostalAddress"
+            android:text="@={viewModel.address.city}"
             app:layout_constraintEnd_toStartOf="@id/state"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/address_line_2" />
@@ -63,6 +71,7 @@
             android:autofillHints=""
             android:entries="@array/states"
             android:inputType="textPostalAddress"
+            app:spinnerAddress="@{viewModel.address}"
             app:layout_constraintBottom_toBottomOf="@id/city"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/city"
@@ -78,6 +87,7 @@
             android:hint="@string/zip_hint"
             android:inputType="number"
             android:maxLength="5"
+            android:text="@={viewModel.address.zip}"
             app:layout_constraintEnd_toEndOf="@id/city"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/city" />

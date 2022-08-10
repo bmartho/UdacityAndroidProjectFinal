@@ -3,11 +3,12 @@ package com.example.android.politicalpreparedness.repository
 import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.network.models.RepresentativeResponse
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ElectionsRepository(private val dataSource: ElectionDao) {
+class ElectionsRepository(private val dataSource: ElectionDao? = null) {
     suspend fun getElections(): List<Election>? {
         return try {
             CivicsApi.retrofitService.getElections().elections
@@ -24,22 +25,30 @@ class ElectionsRepository(private val dataSource: ElectionDao) {
         }
     }
 
+    suspend fun getRepresentatives(address: String): RepresentativeResponse? {
+        return try {
+            CivicsApi.retrofitService.getRepresentatives(address)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     suspend fun followElection(election: Election) {
         withContext(Dispatchers.IO) {
-            dataSource.insertElection(election)
+            dataSource?.insertElection(election)
         }
     }
 
     suspend fun unfollowElection(electionId: Int) {
         withContext(Dispatchers.IO) {
-            dataSource.deleteElectionById(electionId)
+            dataSource?.deleteElectionById(electionId)
         }
     }
 
     suspend fun getElectionById(electionId: Int) =
         withContext(Dispatchers.IO) {
-            dataSource.getElectionById(electionId)
+            dataSource?.getElectionById(electionId)
         }
 
-    fun getFollowedElections() = dataSource.getAllElections()
+    fun getFollowedElections() = dataSource?.getAllElections()
 }
