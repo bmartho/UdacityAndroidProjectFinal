@@ -22,4 +22,15 @@
     <string name="unfollow_election">Unfollow Election</string>
     <string name="election_not_found_error">Error: Election not found</string>
 
+    <!-- Representative fragment -->
+    <string name="representative_search_header">Representative Search</string>
+    <string name="my_representative_header">My Representatives</string>
+    <string name="address_line_1_hint">Address Line 1</string>
+    <string name="address_line_2_hint">Address Line 2</string>
+    <string name="city_hint">City</string>
+    <string name="zip_hint">Zip</string>
+    <string name="find_my_representatives_button">Find my representatives</string>
+    <string name="use_my_location_button">Use my location</string>
+
+
 </resources>

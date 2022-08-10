@@ -2,7 +2,9 @@
 <resources>
     <dimen name="default_half_padding">8dp</dimen>
     <dimen name="default_margin">16dp</dimen>
+    <dimen name="default_double_margin">32dp</dimen>
     <dimen name="default_half_margin">8dp</dimen>
+    <dimen name="default_double_half_margin">4dp</dimen>
 
     <!-- Launcher fragment -->
     <dimen name="ballot_logo_margin_top">130dp</dimen>
