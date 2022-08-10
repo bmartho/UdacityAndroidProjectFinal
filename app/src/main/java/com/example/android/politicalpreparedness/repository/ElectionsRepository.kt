@@ -41,4 +41,5 @@ class ElectionsRepository(private val dataSource: ElectionDao) {
             dataSource.getElectionById(electionId)
         }
 
+    fun getFollowedElections() = dataSource.getAllElections()
 }

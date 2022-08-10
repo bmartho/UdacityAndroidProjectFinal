@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
 import com.example.android.politicalpreparedness.election.adapter.ElectionListener
+import com.example.android.politicalpreparedness.network.models.Election
 
 class ElectionsFragment : Fragment() {
 
     private lateinit var electionListAdapter: ElectionListAdapter
+    private lateinit var followedElectionListAdapter: ElectionListAdapter
     lateinit var binding: FragmentElectionBinding
     lateinit var viewModel: ElectionsViewModel
 
@@ -35,32 +36,32 @@ class ElectionsFragment : Fragment() {
         configureObservers()
 
         electionListAdapter = ElectionListAdapter(ElectionListener { election ->
-            this.findNavController()
-                .navigate(
-                    ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(
-                        election.id,
-                        election.division
-                    )
-                )
+            goToVoterInfo(election)
         })
 
-        val manager = LinearLayoutManager(activity)
+        followedElectionListAdapter = ElectionListAdapter(ElectionListener { election ->
+            goToVoterInfo(election)
+        })
+
         with(binding.upcomingElectionRecycler) {
             adapter = electionListAdapter
-            layoutManager = manager
         }
 
-        //TODO: Add ViewModel values and create ViewModel
-
-        //TODO: Add binding values
-
-        //TODO: Link elections to voter info
-
-        //TODO: Initiate recycler adapters
-
-        //TODO: Populate recycler adapters
+        with(binding.followedElectionRecycler) {
+            adapter = followedElectionListAdapter
+        }
 
         return binding.root
+    }
+
+    private fun goToVoterInfo(election: Election) {
+        this.findNavController()
+            .navigate(
+                ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(
+                    election.id,
+                    election.division
+                )
+            )
     }
 
     private fun configureObservers() {
@@ -69,6 +70,15 @@ class ElectionsFragment : Fragment() {
                 electionListAdapter.submitList(elections)
                 binding.upcomingElectionRecycler.visibility = VISIBLE
             }
+        }
+
+        viewModel.followedElections.observe(viewLifecycleOwner) { elections ->
+            if (elections.isNotEmpty()) {
+                followedElectionListAdapter.submitList(elections)
+                binding.followedElectionRecycler.visibility = VISIBLE
+            }
+
+            binding.followedElectionLoadingWheel.visibility = GONE
         }
 
         viewModel.upcomingElectionsLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -87,7 +97,4 @@ class ElectionsFragment : Fragment() {
             }
         }
     }
-
-    //TODO: Refresh adapters when fragment loads
-
 }

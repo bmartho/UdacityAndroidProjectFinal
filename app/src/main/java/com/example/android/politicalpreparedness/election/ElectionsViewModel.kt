@@ -13,6 +13,8 @@ class ElectionsViewModel(private val repository: ElectionsRepository) : ViewMode
         get() = _upcomingElections
     private val _upcomingElections = MutableLiveData(listOf<Election>())
 
+    val followedElections = repository.getFollowedElections()
+
     val upcomingElectionsError: LiveData<Boolean>
         get() = _upcomingElectionsError
     private val _upcomingElectionsError = MutableLiveData(false)
@@ -42,11 +44,4 @@ class ElectionsViewModel(private val repository: ElectionsRepository) : ViewMode
             _upcomingElectionsLoading.value = false
         }
     }
-
-    //TODO: Create live data val for saved elections
-
-    //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
-
-    //TODO: Create functions to navigate to saved or upcoming election voter info
-
 }
