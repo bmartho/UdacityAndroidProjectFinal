@@ -16,22 +16,37 @@ class RepresentativeViewModel(
         get() = _representatives
     private val _representatives = MutableLiveData<List<Representative>>()
 
+    val representativesApiError: LiveData<Boolean>
+        get() = _representativesApiError
+    private val _representativesApiError = MutableLiveData(false)
+
+    val representativesApiLoading: LiveData<Boolean>
+        get() = _representativesApiLoading
+    private val _representativesApiLoading = MutableLiveData(false)
+
     val address = MutableLiveData(Address("", "", "", "", ""))
 
     fun getRepresentatives() {
         viewModelScope.launch {
+            _representativesApiLoading.value = true
+            _representativesApiError.value = false
+
             address.value?.let { value ->
                 val representativeResponse =
                     repository.getRepresentatives(value.toFormattedString())
 
                 if (representativeResponse == null) {
-
+                    _representativesApiError.value = true
                 } else {
+                    _representativesApiError.value = false
+
                     val (offices, officials) = representativeResponse
                     _representatives.value =
                         offices.flatMap { office -> office.getRepresentatives(officials) }
                 }
             }
+
+            _representativesApiLoading.value = false
         }
     }
 

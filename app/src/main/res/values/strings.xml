@@ -31,6 +31,6 @@
     <string name="zip_hint">Zip</string>
     <string name="find_my_representatives_button">Find my representatives</string>
     <string name="use_my_location_button">Use my location</string>
-
+    <string name="representatives_not_found_error">Error: Representatives not found</string>
 
 </resources>

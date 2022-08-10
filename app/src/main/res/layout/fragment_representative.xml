@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:motion="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewModel"
             type="com.example.android.politicalpreparedness.representative.RepresentativeViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
@@ -71,11 +73,11 @@
             android:autofillHints=""
             android:entries="@array/states"
             android:inputType="textPostalAddress"
-            app:spinnerAddress="@{viewModel.address}"
             app:layout_constraintBottom_toBottomOf="@id/city"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/city"
-            app:layout_constraintTop_toTopOf="@id/city" />
+            app:layout_constraintTop_toTopOf="@id/city"
+            app:spinnerAddress="@{viewModel.address}" />
 
         <!-- TODO: Add data binding value -->
         <EditText
@@ -118,18 +120,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_location" />
 
-        <!-- TODO: Add Representatives RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/representatives_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/representative_title" />
+
+        <ProgressBar
+            android:id="@+id/representatives_loading_wheel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.representativesApiLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/representative_title" />
 
         <TextView
-            android:id="@+id/list_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:visibility="gone"
+            android:id="@+id/representatives_error_text"
+            style="@style/ErrorTexts"
+            android:padding="@dimen/default_padding"
+            android:text="@string/representatives_not_found_error"
+            android:visibility="@{viewModel.representativesApiError ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/representative_title"
-            motion:visibilityMode="ignore" />
+            tools:text="Error: Try again later" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
 import java.util.*
@@ -21,19 +22,24 @@ class DetailFragment : Fragment() {
     }
 
     lateinit var viewModel: RepresentativeViewModel
+    lateinit var binding: FragmentRepresentativeBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentRepresentativeBinding.inflate(inflater)
+        binding = FragmentRepresentativeBinding.inflate(inflater)
         binding.lifecycleOwner = this
         viewModel = ViewModelProvider(this).get(RepresentativeViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.buttonSearch.setOnClickListener {
+            hideKeyboard()
             viewModel.getRepresentatives()
         }
+
+        configureObservers()
 
         //TODO: Establish bindings
 
@@ -43,6 +49,15 @@ class DetailFragment : Fragment() {
 
         //TODO: Establish button listeners for field and location search
         return binding.root
+    }
+
+    private fun configureObservers() {
+        viewModel.representatives.observe(viewLifecycleOwner) { representatives ->
+            if (representatives.isNotEmpty()) {
+                //electionListAdapter.submitList(elections)
+                binding.representativesRecycler.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
