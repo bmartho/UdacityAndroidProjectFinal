@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import java.util.*
 
 class DetailFragment : Fragment() {
@@ -23,6 +24,7 @@ class DetailFragment : Fragment() {
 
     lateinit var viewModel: RepresentativeViewModel
     lateinit var binding: FragmentRepresentativeBinding
+    lateinit var representativeListAdapter: RepresentativeListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,23 +41,21 @@ class DetailFragment : Fragment() {
             viewModel.getRepresentatives()
         }
 
+        representativeListAdapter = RepresentativeListAdapter()
+        binding.representativesRecycler.adapter = representativeListAdapter
+
         configureObservers()
 
-        //TODO: Establish bindings
-
-        //TODO: Define and assign Representative adapter
-
-        //TODO: Populate Representative adapter
-
-        //TODO: Establish button listeners for field and location search
         return binding.root
     }
 
     private fun configureObservers() {
         viewModel.representatives.observe(viewLifecycleOwner) { representatives ->
             if (representatives.isNotEmpty()) {
-                //electionListAdapter.submitList(elections)
+                representativeListAdapter.submitList(representatives)
                 binding.representativesRecycler.visibility = View.VISIBLE
+            } else {
+                binding.representativesRecycler.visibility = View.GONE
             }
         }
     }

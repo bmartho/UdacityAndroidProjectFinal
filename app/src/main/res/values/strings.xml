@@ -32,5 +32,9 @@
     <string name="find_my_representatives_button">Find my representatives</string>
     <string name="use_my_location_button">Use my location</string>
     <string name="representatives_not_found_error">Error: Representatives not found</string>
+    <string name="representatives_picture_content_description">Representative picture</string>
+    <string name="facebook_icon_content_description">Facebook icon</string>
+    <string name="twitter_icon_content_description">Twitter picture</string>
+    <string name="web_icon_content_description">Web picture</string>
 
 </resources>

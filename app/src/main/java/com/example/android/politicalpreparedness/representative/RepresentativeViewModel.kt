@@ -30,6 +30,7 @@ class RepresentativeViewModel(
         viewModelScope.launch {
             _representativesApiLoading.value = true
             _representativesApiError.value = false
+            _representatives.value = listOf()
 
             address.value?.let { value ->
                 val representativeResponse =

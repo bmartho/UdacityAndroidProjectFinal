@@ -21,5 +21,11 @@
     <dimen name="voter_info_date_text">18sp</dimen>
     <dimen name="voter_info_text_size_headers">24sp</dimen>
 
+    <!-- Representative fragment -->
+    <dimen name="representative_picture_width_height">75dp</dimen>
+    <dimen name="representative_official_text">18sp</dimen>
+    <dimen name="representative_name_text">17sp</dimen>
+    <dimen name="representative_party_text">15sp</dimen>
+    <dimen name="representative_network_icon_width_height">35dp</dimen>
 
 </resources>

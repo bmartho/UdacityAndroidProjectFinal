@@ -13,147 +13,152 @@
     </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/search_title"
-            style="@style/DefaultHeaders"
-            android:text="@string/representative_search_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- TODO: Add data binding value -->
-        <EditText
-            android:id="@+id/address_line_1"
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_double_half_margin"
-            android:autofillHints=""
-            android:hint="@string/address_line_1_hint"
-            android:inputType="textPostalAddress"
-            android:text="@={viewModel.address.line1}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_title" />
+            android:layout_height="match_parent">
 
-        <!-- TODO: Add data binding value -->
-        <EditText
-            android:id="@+id/address_line_2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/default_double_half_margin"
-            android:autofillHints=""
-            android:hint="@string/address_line_2_hint"
-            android:inputType="textPostalAddress"
-            android:text="@={viewModel.address.line2}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/address_line_1" />
+            <TextView
+                android:id="@+id/search_title"
+                style="@style/DefaultHeaders"
+                android:text="@string/representative_search_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO: Add data binding value -->
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_double_half_margin"
-            android:autofillHints=""
-            android:hint="@string/city_hint"
-            android:inputType="textPostalAddress"
-            android:text="@={viewModel.address.city}"
-            app:layout_constraintEnd_toStartOf="@id/state"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/address_line_2" />
+            <!-- TODO: Add data binding value -->
+            <EditText
+                android:id="@+id/address_line_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_double_half_margin"
+                android:autofillHints=""
+                android:hint="@string/address_line_1_hint"
+                android:inputType="textPostalAddress"
+                android:text="@={viewModel.address.line1}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_title" />
 
-        <!-- TODO: Add default values from provided resources  -->
-        <!-- TODO: Add data binding value -->
-        <Spinner
-            android:id="@+id/state"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:autofillHints=""
-            android:entries="@array/states"
-            android:inputType="textPostalAddress"
-            app:layout_constraintBottom_toBottomOf="@id/city"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/city"
-            app:layout_constraintTop_toTopOf="@id/city"
-            app:spinnerAddress="@{viewModel.address}" />
+            <!-- TODO: Add data binding value -->
+            <EditText
+                android:id="@+id/address_line_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/default_double_half_margin"
+                android:autofillHints=""
+                android:hint="@string/address_line_2_hint"
+                android:inputType="textPostalAddress"
+                android:text="@={viewModel.address.line2}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address_line_1" />
 
-        <!-- TODO: Add data binding value -->
-        <EditText
-            android:id="@+id/zip"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_double_half_margin"
-            android:autofillHints=""
-            android:hint="@string/zip_hint"
-            android:inputType="number"
-            android:maxLength="5"
-            android:text="@={viewModel.address.zip}"
-            app:layout_constraintEnd_toEndOf="@id/city"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city" />
+            <!-- TODO: Add data binding value -->
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_double_half_margin"
+                android:autofillHints=""
+                android:hint="@string/city_hint"
+                android:inputType="textPostalAddress"
+                android:text="@={viewModel.address.city}"
+                app:layout_constraintEnd_toStartOf="@id/state"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address_line_2" />
 
-        <Button
-            android:id="@+id/button_search"
-            style="@style/DefaultButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_half_margin"
-            android:text="@string/find_my_representatives_button"
-            app:layout_constraintTop_toBottomOf="@id/zip" />
+            <!-- TODO: Add default values from provided resources  -->
+            <!-- TODO: Add data binding value -->
+            <Spinner
+                android:id="@+id/state"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autofillHints=""
+                android:entries="@array/states"
+                android:inputType="textPostalAddress"
+                app:layout_constraintBottom_toBottomOf="@id/city"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/city"
+                app:layout_constraintTop_toTopOf="@id/city"
+                app:spinnerAddress="@{viewModel.address}" />
 
-        <Button
-            android:id="@+id/button_location"
-            style="@style/DefaultButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_half_margin"
-            android:text="@string/use_my_location_button"
-            app:layout_constraintTop_toBottomOf="@id/button_search" />
+            <!-- TODO: Add data binding value -->
+            <EditText
+                android:id="@+id/zip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_double_half_margin"
+                android:autofillHints=""
+                android:hint="@string/zip_hint"
+                android:inputType="number"
+                android:maxLength="5"
+                android:text="@={viewModel.address.zip}"
+                app:layout_constraintEnd_toEndOf="@id/city"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/city" />
 
-        <TextView
-            android:id="@+id/representative_title"
-            style="@style/DefaultHeaders"
-            android:layout_marginTop="@dimen/default_double_margin"
-            android:text="@string/my_representative_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_location" />
+            <Button
+                android:id="@+id/button_search"
+                style="@style/DefaultButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_half_margin"
+                android:text="@string/find_my_representatives_button"
+                app:layout_constraintTop_toBottomOf="@id/zip" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/representatives_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:scrollbars="vertical"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/representative_title" />
+            <Button
+                android:id="@+id/button_location"
+                style="@style/DefaultButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_half_margin"
+                android:text="@string/use_my_location_button"
+                app:layout_constraintTop_toBottomOf="@id/button_search" />
 
-        <ProgressBar
-            android:id="@+id/representatives_loading_wheel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:indeterminate="true"
-            android:visibility="@{viewModel.representativesApiLoading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/representative_title" />
+            <TextView
+                android:id="@+id/representative_title"
+                style="@style/DefaultHeaders"
+                android:layout_marginTop="@dimen/default_double_margin"
+                android:text="@string/my_representative_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_location" />
 
-        <TextView
-            android:id="@+id/representatives_error_text"
-            style="@style/ErrorTexts"
-            android:padding="@dimen/default_padding"
-            android:text="@string/representatives_not_found_error"
-            android:visibility="@{viewModel.representativesApiError ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/representative_title"
-            tools:text="Error: Try again later" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/representatives_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:scrollbars="vertical"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/representative_title" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+            <ProgressBar
+                android:id="@+id/representatives_loading_wheel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:indeterminate="true"
+                android:visibility="@{viewModel.representativesApiLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/representative_title" />
+
+            <TextView
+                android:id="@+id/representatives_error_text"
+                style="@style/ErrorTexts"
+                android:padding="@dimen/default_padding"
+                android:text="@string/representatives_not_found_error"
+                android:visibility="@{viewModel.representativesApiError ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/representative_title"
+                tools:text="Error: Try again later" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
