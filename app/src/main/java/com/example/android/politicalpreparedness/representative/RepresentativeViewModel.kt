@@ -1,5 +1,7 @@
 package com.example.android.politicalpreparedness.representative
 
+import android.location.Geocoder
+import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,8 +53,17 @@ class RepresentativeViewModel(
         }
     }
 
-    //TODO: Create function get address from geo location
-
-    //TODO: Create function to get address from individual fields
-
+    fun setAddressBasedOnLocation(location: Location, geocoder: Geocoder) {
+        address.value = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+            .map { newAddress ->
+                Address(
+                    newAddress.thoroughfare ?: "",
+                    newAddress.subThoroughfare ?: "",
+                    newAddress.locality ?: "",
+                    newAddress.adminArea ?: "",
+                    newAddress.postalCode ?: ""
+                )
+            }
+            .first()
+    }
 }

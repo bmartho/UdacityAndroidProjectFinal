@@ -36,5 +36,7 @@
     <string name="facebook_icon_content_description">Facebook icon</string>
     <string name="twitter_icon_content_description">Twitter picture</string>
     <string name="web_icon_content_description">Web picture</string>
+    <string name="no_location_permission_error">It is necessary to give location permission to use this feature</string>
+    <string name="get_location_error">Please, enable your location to use this feature</string>
 
 </resources>
