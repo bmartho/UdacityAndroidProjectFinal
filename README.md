@@ -1,3 +1,7 @@
+## Before execute the app
+
+It's necessary to input your Google API KEY on "API_KEY" constant inside CivicsHttpClient.kt file
+
 ## Political Preparedness
 
 PolitcalPreparedness is an example application built to demonstrate core Android Development skills as presented in the Udacity Android Developers Kotlin curriculum. 
