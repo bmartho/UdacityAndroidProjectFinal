@@ -8,7 +8,8 @@
     <dimen name="default_double_half_margin">4dp</dimen>
 
     <!-- Launcher fragment -->
-    <dimen name="ballot_logo_margin_top">130dp</dimen>
+    <dimen name="ballot_logo_margin_top">120dp</dimen>
+    <dimen name="upcoming_button_margin_to">140dp</dimen>
 
     <!-- Elections fragment -->
     <dimen name="election_fragment_text_size_headers">32sp</dimen>

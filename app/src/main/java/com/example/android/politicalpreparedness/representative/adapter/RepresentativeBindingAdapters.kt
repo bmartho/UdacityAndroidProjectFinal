@@ -13,25 +13,30 @@ import com.example.android.politicalpreparedness.network.models.Address
 
 @BindingAdapter("profileImage")
 fun fetchImage(view: ImageView, src: String?) {
-    src?.let {
+    if (src != null) {
         val uri = src.toUri().buildUpon().scheme("https").build()
-        Glide.with(view).load(uri).circleCrop().error(R.drawable.ic_profile).into(view)
+        Glide.with(view)
+            .load(uri)
+            .circleCrop()
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .into(view)
     }
 }
 
 
 @BindingAdapter("spinnerAddress")
-fun Spinner.setAddress(address: Address) {
-    val adapter = toTypedAdapter<String>(this.adapter as ArrayAdapter<*>)
+fun setAddress(spinner: Spinner, address: Address) {
+    val adapter = toTypedAdapter<String>(spinner.adapter as ArrayAdapter<*>)
     val position = when (adapter.getItem(0)) {
         is String -> adapter.getPosition(address.state)
-        else -> this.selectedItemPosition
+        else -> spinner.selectedItemPosition
     }
     if (position >= 0) {
-        setSelection(position)
+        spinner.setSelection(position)
     }
 
-    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
         }

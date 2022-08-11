@@ -3,40 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/default_margin"
-        tools:context="com.example.android.politicalpreparedness.MainActivity">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ballot_logo_margin_top"
-            android:contentDescription="@string/content_description_ballot_logo"
-            android:src="@drawable/ballot_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/upcomingButton"
-            style="@style/DefaultButtons"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:text="@string/upcoming_button_text"
-            app:layout_constraintBottom_toTopOf="@id/representativeButton"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:padding="@dimen/default_margin"
+            tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <Button
-            android:id="@+id/representativeButton"
-            style="@style/DefaultButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/representative_button_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/ballotImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ballot_logo_margin_top"
+                android:contentDescription="@string/content_description_ballot_logo"
+                android:src="@drawable/ballot_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/upcomingButton"
+                style="@style/DefaultButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/upcoming_button_margin_to"
+                android:text="@string/upcoming_button_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ballotImage" />
+
+            <Button
+                android:id="@+id/representativeButton"
+                style="@style/DefaultButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/representative_button_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcomingButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
