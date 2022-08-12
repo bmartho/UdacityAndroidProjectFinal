@@ -2,21 +2,22 @@ package com.example.android.politicalpreparedness.representative
 
 import android.location.Geocoder
 import android.location.Location
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.repository.ElectionsRepository
 import com.example.android.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.launch
 
 class RepresentativeViewModel(
-    private val repository: ElectionsRepository = ElectionsRepository()
+    private val state: SavedStateHandle
 ) : ViewModel() {
+    private val repository: ElectionsRepository = ElectionsRepository()
+
     val representatives: LiveData<List<Representative>>
         get() = _representatives
-    private val _representatives = MutableLiveData<List<Representative>>()
+    private val _representatives = MutableLiveData(
+        state.get(REPRESENTATIVE_LIST) ?: listOf<Representative>()
+    )
 
     val representativesApiError: LiveData<Boolean>
         get() = _representativesApiError
@@ -26,7 +27,17 @@ class RepresentativeViewModel(
         get() = _representativesApiLoading
     private val _representativesApiLoading = MutableLiveData(false)
 
-    val address = MutableLiveData(Address("", "", "", "", ""))
+    val address: LiveData<Address>
+        get() = _address
+    private val _address = MutableLiveData(
+        state.get(ADDRESS) ?: Address(
+            line1 = "",
+            line2 = null,
+            city = "",
+            state = "",
+            zip = ""
+        )
+    )
 
     fun getRepresentatives() {
         viewModelScope.launch {
@@ -54,7 +65,7 @@ class RepresentativeViewModel(
     }
 
     fun setAddressBasedOnLocation(location: Location, geocoder: Geocoder) {
-        address.value = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        _address.value = geocoder.getFromLocation(location.latitude, location.longitude, 1)
             .map { newAddress ->
                 Address(
                     newAddress.thoroughfare ?: "",
@@ -65,5 +76,15 @@ class RepresentativeViewModel(
                 )
             }
             .first()
+    }
+
+    fun saveState() {
+        state[ADDRESS] = address.value
+        state[REPRESENTATIVE_LIST] = representatives.value
+    }
+
+    companion object {
+        const val ADDRESS = "ADDRESS"
+        const val REPRESENTATIVE_LIST = "REPRESENTATIVE_LIST"
     }
 }

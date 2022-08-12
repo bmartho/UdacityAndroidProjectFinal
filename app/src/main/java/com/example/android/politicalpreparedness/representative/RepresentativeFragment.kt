@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,7 @@ class DetailFragment : Fragment() {
 
     companion object {
         private const val REQUEST_LOCATION_PERMISSION = 12345
+        private const val MOTION_LAYOUT_STATE_KEY = "MOTION_LAYOUT_STATE_KEY"
     }
 
     lateinit var viewModel: RepresentativeViewModel
@@ -57,6 +59,13 @@ class DetailFragment : Fragment() {
         binding.representativesRecycler.adapter = representativeListAdapter
 
         configureObservers()
+
+        if (savedInstanceState != null) {
+            if (binding.representativesConstraint is MotionLayout) {
+                val motion = binding.representativesConstraint as MotionLayout
+                motion.transitionToState(savedInstanceState.getInt(MOTION_LAYOUT_STATE_KEY))
+            }
+        }
 
         return binding.root
     }
@@ -138,5 +147,17 @@ class DetailFragment : Fragment() {
             R.string.get_location_error,
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (::viewModel.isInitialized)
+            viewModel.saveState()
+
+        if (binding.representativesConstraint is MotionLayout) {
+            val motion = binding.representativesConstraint as MotionLayout
+            outState.putInt(MOTION_LAYOUT_STATE_KEY, motion.currentState)
+        }
+
+        super.onSaveInstanceState(outState)
     }
 }
