@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,12 +14,11 @@
             type="com.example.android.politicalpreparedness.election.adapter.ElectionListener" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_margin"
-        android:onClick="@{() -> clickListener.onClick(election)}"
-        android:orientation="vertical">
+        android:onClick="@{() -> clickListener.onClick(election)}">
 
         <TextView
             android:id="@+id/election_title"
@@ -27,6 +27,8 @@
             android:text="@{election.name}"
             android:textSize="@dimen/election_item_title_text"
             android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Michigan Consolidate Election" />
 
         <TextView
@@ -35,7 +37,9 @@
             android:layout_height="wrap_content"
             android:text="@{election.electionDay.toString()}"
             android:textSize="@dimen/election_item_date_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/election_title"
             tools:text="Tue Apr 07 00:00:00 EDT 2020" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
