@@ -6,18 +6,26 @@ import com.squareup.moshi.ToJson
 
 class ElectionAdapter {
     @FromJson
-    fun divisionFromJson (ocdDivisionId: String): Division {
+    fun divisionFromJson(ocdDivisionId: String): Division {
         val countryDelimiter = "country:"
         val stateDelimiter = "state:"
-        val country = ocdDivisionId.substringAfter(countryDelimiter,"")
+        val districtDelimiter = "district:"
+        val country = ocdDivisionId.substringAfter(countryDelimiter, "")
+            .substringBefore("/")
+        var state = ocdDivisionId.substringAfter(stateDelimiter, "")
+            .substringBefore("/")
+
+        // if doesn't have state, try for district
+        if (state.isEmpty()) {
+            state = ocdDivisionId.substringAfter(districtDelimiter, "")
                 .substringBefore("/")
-        val state = ocdDivisionId.substringAfter(stateDelimiter,"")
-                .substringBefore("/")
+        }
+
         return Division(ocdDivisionId, country, state)
     }
 
     @ToJson
-    fun divisionToJson (division: Division): String {
+    fun divisionToJson(division: Division): String {
         return division.id
     }
 }
