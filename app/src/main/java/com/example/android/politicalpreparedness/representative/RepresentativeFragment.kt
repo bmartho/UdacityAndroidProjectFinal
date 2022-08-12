@@ -61,10 +61,8 @@ class DetailFragment : Fragment() {
         configureObservers()
 
         if (savedInstanceState != null) {
-            if (binding.representativesConstraint is MotionLayout) {
-                val motion = binding.representativesConstraint as MotionLayout
-                motion.transitionToState(savedInstanceState.getInt(MOTION_LAYOUT_STATE_KEY))
-            }
+            val motion = binding.representativesConstraint
+            motion.transitionToState(savedInstanceState.getInt(MOTION_LAYOUT_STATE_KEY))
         }
 
         return binding.root
@@ -153,10 +151,8 @@ class DetailFragment : Fragment() {
         if (::viewModel.isInitialized)
             viewModel.saveState()
 
-        if (binding.representativesConstraint is MotionLayout) {
-            val motion = binding.representativesConstraint as MotionLayout
-            outState.putInt(MOTION_LAYOUT_STATE_KEY, motion.currentState)
-        }
+        val motion = binding.representativesConstraint
+        outState.putInt(MOTION_LAYOUT_STATE_KEY, motion.currentState)
 
         super.onSaveInstanceState(outState)
     }
